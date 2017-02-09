@@ -1,29 +1,36 @@
 apply plugin: 'com.android.application'
-
+//插件 'com.android.application'表示这是一个应用程序模块
+// 'com.android.library'表示这是一个库模块
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 25  //该项目的编译版本
+    buildToolsVersion "25.0.1" //该项目的编译工具版本
     defaultConfig {
-        applicationId "com.todayweather.android"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        applicationId "com.todayweather.android" //该项目的包名
+        minSdkVersion 15  //项目兼容的最低Android系统版本
+        targetSdkVersion 25  //可以体现新的特性
+        versionCode 1   //项目的版本号
+        versionName "1.0" //项目的版本名称
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled false  //指定是否对项目进行混淆 true表示混淆  false表示不进行混淆
+            //'proguard-android.txt'在Android的SDK目录下，里面是所有项目通用的混淆规则
+            //'proguard-rules.pro'在当前项目的根目录下，能够变相当前项目特有的混淆规则
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
-
+//指定当前项目的所有依赖关系 Androidstudio共有三种以来关系  本地依赖、库依赖和远程依赖
 dependencies {
+    //本地依赖生命
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //远程依赖声明  com.android.support是域名部分 对公司进行区分  appcompat-v7:组名称 对其他组进行区分
+    //25.1.0  表示版本号 对版本进行区分
     compile 'com.android.support:appcompat-v7:25.1.0'
+    //用于声明测试用例库
     testCompile 'junit:junit:4.12'
 }
